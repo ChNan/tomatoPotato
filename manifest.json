@@ -1,0 +1,18 @@
+{
+    "name": "tomatoPotato",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "tomato potato, time management",
+    "browser_action": {
+        "default_icon": "assets/images/icon.png",
+        "default_popup": "html/popup.html"
+    },
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "notifications"
+    ],
+    "sandbox": {
+        "pages": ["tpl/template.html"]
+    }
+}

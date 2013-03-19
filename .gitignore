@@ -1,0 +1,4 @@
+_site/**
+.rvmrc
+._*
+.idea/

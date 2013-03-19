@@ -1,0 +1,26 @@
+<script src="../lib/handlebars.js"></script>
+<script id="tomato-list-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <h1>Hello, {{thing}}!</h1>
+    </div>
+</script>
+<script>
+
+    var templates = [];
+    var source = document.getElementById('tomato-list-template').innerHTML;
+    templates['tomato-list'] = Handlebars.compile(source);
+
+    window.addEventListener('message', function(event) {
+
+        var name = event.data.name || 'default';
+        switch(name) {
+            case 'tomato-list':
+                event.source.postMessage({
+                    name: name,
+                    html: templates[name](event.data.context)
+                }, event.origin);
+                break;
+        }
+    });
+
+</script>

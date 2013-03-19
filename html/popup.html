@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TomatoPotato</title>
+    <meta charset="utf-8">
+    <script src="../seajs/sea-debug.js" data-config="js/config.js" data-main="js/main.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="menu">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand">Tomato</a>
+                    <ul class="nav">
+                        <li class="active"><a href="#">history</a></li>
+                        <li><a href="#">add</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="current-tomato">
+            <div class="setting">
+                <ul class="the-icons">
+                    <li title="设置" class="icon-cog"></li>
+                </ul>
+            </div>
+            <span class="timer">20min</span>
+            <span class="running-tomato">current tomato</span>
+        </div>
+        <div class="tomato-list">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td class="td-no">1.</td>
+                        <td class="td-content">potato</td>
+                        <td class="td-other">
+                            <ul class="the-icons">
+                                <li title="开始" class="icon-play"></li>
+                                <li title="丢弃" class="icon-trash"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>potato</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <iframe id="theFrame" src="../tpl/template.html"></iframe>
+</body>
+</html>
