@@ -1,8 +1,23 @@
+<meta charset="utf-8">
 <script src="../lib/handlebars.js"></script>
 <script id="tomato-list-template" type="text/x-handlebars-template">
-    <div class="entry">
-        <h1>Hello, {{thing}}!</h1>
-    </div>
+    <table class="table table-hover">
+        <tbody>
+            {{#each .}}
+            <tr>
+                <td class="td-no">{{no}}</td>
+                <td class="td-content">{{todo}}</td>
+                <td class="td-other">
+                    <ul class="the-icons">
+                        <li title="开始" class="icon-play"></li>
+                        <li title="丢弃" class="icon-trash"></li>
+                        <li class="hidden">{{id}}</li>
+                    </ul>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </script>
 <script>
 

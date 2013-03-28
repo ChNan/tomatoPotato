@@ -23,6 +23,8 @@ define(function(require, exports, module){
             this._regEvents();
 
             _.extend(this, backbone.Events);
+
+            this._loadTemplatePage();
         },
 
         _regEvents: function(){
@@ -32,6 +34,11 @@ define(function(require, exports, module){
 
                 that.trigger(that.triggerList.receive, e.data);
             };
+        },
+
+        _loadTemplatePage: function(){
+
+            $('#theFrame').attr({src: '../tpl/template.html'});
         },
 
         getTemplate: function(templateName, data){

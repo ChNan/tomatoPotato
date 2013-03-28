@@ -5,12 +5,17 @@
     "description": "tomato potato, time management",
     "browser_action": {
         "default_icon": "assets/images/icon.png",
-        "default_popup": "html/popup.html"
+        "default_popup": "html/popup.html",
+        "default_title": "番茄土豆"
+    },
+    "background": {
+        "page": "background/background.html"
     },
     "permissions": [
         "tabs",
         "http://*/*",
-        "notifications"
+        "notifications",
+        "background"
     ],
     "sandbox": {
         "pages": ["tpl/template.html"]

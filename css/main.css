@@ -27,7 +27,6 @@ table {border-collapse: collapse;border-spacing: 0;}
 
 .main{
     width: 400px;
-    height: 500px;
 }
 .main .menu{
     height: 30px;
@@ -38,15 +37,21 @@ table {border-collapse: collapse;border-spacing: 0;}
     margin-top: 13px;
 }
 .main .timer{
+    height: 45px;
     font-size: 35px;
     font-weight: bold;
-    margin-left: 120px;
+    margin-left: 150px;
     margin-top: 10px;
     display:block;
 }
 .main .setting{
     float: right;
     margin-right: 5px;
+}
+.table .hidden{
+    width: 0;
+    height: 0;
+    visibility: hidden;
 }
 .table .td-no{
     width: 20px;
