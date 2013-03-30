@@ -13,11 +13,14 @@ define(function(require, exports, module){
     var backbone = require('backbone');
     var _ = require('underscore');
     var $ = jQuery = require('jquery');
+    var bootstrap = require('bootstrap');
 
     require('js/localStorage');
     var template = require('js/template');
     var todoCollection = require('js/todo-collection');
     var utility = require('js/utility');
+
+    bootstrap($);
 
     var mainView = backbone.View.extend({
 

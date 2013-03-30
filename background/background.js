@@ -11,17 +11,14 @@ define(function(require, exports, module){
 
     window.tomatoTime = new time();
 
-    var popup;
-
+     // 设置当前番茄时间
     tomatoTime.on(tomatoTime.triggerList.timeChange, function(t){
 
         var views = chrome.extension.getViews({type:'popup'});
 
         if(views){
 
-            popup = views[0].main;
-
-            popup.setTomatoTime(t.time);
+            views[0].main.setTomatoTime(t.time);
         }
     });
 

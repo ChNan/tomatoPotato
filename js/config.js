@@ -22,6 +22,7 @@ seajs.config({
             src: 'lib/backbone-min.js',
             exports: 'Backbone',
             deps: ['jquery', 'underscore']
-        }
+        },
+        'bootstrap': 'lib/bootstrap.min.js'
     }
 });

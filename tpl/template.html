@@ -1,23 +1,18 @@
 <meta charset="utf-8">
 <script src="../lib/handlebars.js"></script>
 <script id="tomato-list-template" type="text/x-handlebars-template">
-    <table class="table table-hover">
-        <tbody>
-            {{#each .}}
-            <tr>
-                <td class="td-no">{{no}}</td>
-                <td class="td-content">{{todo}}</td>
-                <td class="td-other">
-                    <ul class="the-icons">
-                        <li title="开始" class="icon-play"></li>
-                        <li title="丢弃" class="icon-trash"></li>
-                        <li class="hidden">{{id}}</li>
-                    </ul>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+    <ul id="todo-list">
+        {{#each .}}
+        <li>
+            <div class="view">
+                <input type="checkbox" class="toggle">
+                <label>{{todo}}</label>
+                <button class="destroy"></button>
+            </div>
+            <input class="edit" value="{{todo}}">
+        </li>
+        {{/each}}
+    </ul>
 </script>
 <script>
 
