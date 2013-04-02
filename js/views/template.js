@@ -13,34 +13,26 @@ define(function(require, exports, module){
 
     var template = backbone.View.extend({
 
-        triggerList: {
-
-            receive: 'receiveTemplate'
-        },
-
         initialize: function(options){
 
             this._regEvents();
 
-            _.extend(this, backbone.Events);
-
-            this._loadTemplatePage();
-        },
-
-        _regEvents: function(){
-
-            var that = this;
-            window.onmessage = function(e){
-
-                that.trigger(that.triggerList.receive, e.data);
-            };
-        },
-
-        _loadTemplatePage: function(){
-
+            // 加载模板页
             $('#theFrame').attr({src: '../tpl/template.html'});
         },
 
+        // 事件注册
+        _regEvents: function(){
+
+            var that = this;
+            // 注册模板页消息事件
+            window.onmessage = function(e){
+
+                that.trigger('receiveTemplate', e.data);
+            };
+        },
+
+        // 请求模板页
         getTemplate: function(templateName, data){
 
             var iframe = document.getElementById('theFrame');

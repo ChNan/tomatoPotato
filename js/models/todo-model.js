@@ -14,24 +14,19 @@ define(function(require, exports, module){
         defaults: {
             id: null,
             todo: null,
+            tomato: null,
             timestamp: null,
             status: null
-        },
-
-        initialize: function(){
-
         },
 
         sync: function(method, model, options){
 
             switch (method){
-                case 'read':
-                    this.readModel();
-                    break;
                 case 'create':
-                    this.createModel();
+                    this.createModel(options);
                     break;
                 case 'update':
+                    this.updateModel(options);
                     break;
                 case 'delete':
                     this.deleteModel();
@@ -39,20 +34,44 @@ define(function(require, exports, module){
             }
         },
 
-        readModel: function(){
+        createModel: function(options){
 
+            var that = this;
+
+            window.dbHelper.insertTodo(this.toJSON(), function(){
+
+                that._success(that, options);
+            });
         },
 
-        createModel: function(){
+        updateModel: function(options){
 
-            window.dbHelper.insertTodo(this.toJSON());
+            var that = this;
+
+            window.dbHelper.updateTodo(this, function(){
+
+                that._success(that, options);
+            });
         },
 
-        deleteModel: function(){
+        deleteModel: function(options){
+
+            var that = this;
 
             this.set({status: -1}, {silent: true});
 
-            window.dbHelper.updateTodo(this);
+            window.dbHelper.updateTodo(this, function(){
+
+                that._success(that, options);
+            });
+        },
+
+        _success: function(model, options){
+
+            if(options && options.success){
+
+                options.success(model.toJSON());
+            }
         }
 
     });

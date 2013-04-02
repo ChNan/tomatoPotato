@@ -26,6 +26,7 @@ define(function(require, exports, module){
             return openDatabase('todo', '', 'todo DB', 2 * 1024 * 1024);
         },
 
+        // 执行sql
         _executeSql: function(sql, params, successCallback){
 
             this._db.transaction(function(t){
@@ -41,14 +42,16 @@ define(function(require, exports, module){
             });
         },
 
+        // 建表
         _createTable: function(){
 
             var createTableSql = 'create table if not exists todoList ' +
-                '(id TEXT, todo TEXT, timestamp DATETIME, status INT) ';
+                '(id TEXT, todo TEXT, tomato INT, timestamp DATETIME, status INT) ';
 
             this._executeSql(createTableSql, []);
         },
 
+        // 查询todo
         getTodo: function(where, successCallback){
 
             var params = [];
@@ -74,20 +77,22 @@ define(function(require, exports, module){
             this._executeSql(sql, params, successCallback);
         },
 
+        // 新建todo
         insertTodo: function(model, successCallback){
 
-            var sql = "insert into todoList (id, todo, timestamp, status)values (?, ?, ?, ?)";
+            var sql = "insert into todoList (id, todo, tomato, timestamp, status)values (?, ?, ?, ?, ?)";
 
-            var params = [utility.getGUID(), model.todo, utility.getDatetime(), 0];
+            var params = [utility.getGUID(), model.todo, 0, utility.getDatetime(), 0];
 
             this._executeSql(sql, params, successCallback);
         },
 
+        // 更新todo
         updateTodo: function(model, successCallback){
 
-            var sql = 'update todoList set status = ? where id = ?';
+            var sql = 'update todoList set todo = ?, status = ?, tomato = ? where id = ?';
 
-            var params = [model.get('status'), model.get('id')];
+            var params = [model.get('todo'), model.get('status'), model.get('tomato'), model.get('id')];
 
             this._executeSql(sql, params, successCallback);
         }

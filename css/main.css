@@ -21,10 +21,10 @@ body {
 }
 .main .timer{
     height: 45px;
-    font-size: 35px;
+    font-size: 45px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
-    margin-left: 180px;
+    margin-left: 170px;
     margin-top: 10px;
     display:block;
 }
@@ -125,6 +125,14 @@ label[for='toggle-all'] {
     border-bottom: 1px dotted #ccc;
 }
 
+#todo-list li div {
+    height: 35px;
+}
+
+#todo-list li div button{
+    margin: 10px;
+}
+
 #todo-list li:last-child {
     border-bottom: none;
 }
@@ -137,36 +145,11 @@ label[for='toggle-all'] {
 #todo-list li.editing .edit {
     display: block;
     padding: 13px 17px 12px 17px;
-    margin: 0 0 0 43px;
+    /*margin: 0 0 0 43px;*/
 }
 
 #todo-list li.editing .view {
     display: none;
-}
-
-#todo-list li .toggle {
-    text-align: center;
-    width: 40px;
-    /* auto, since non-WebKit browsers doesn't support input styling */
-    height: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    border: none; /* Mobile Safari */
-    -webkit-appearance: none;
-    /*-moz-appearance: none;*/
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-}
-
-#todo-list li .toggle:after {
-    content: '✔';
-    line-height: 43px; /* 40 + a couple of pixels visual adjustment */
-    font-size: 20px;
-    color: #d9d9d9;
-    text-shadow: 0 -1px 0 #bfbfbf;
 }
 
 #todo-list li .toggle:checked:after {
@@ -177,9 +160,10 @@ label[for='toggle-all'] {
 }
 
 #todo-list li label {
-    font-size: 18px;
-    padding: 15px;
-    margin-left: 45px;
+    font-size: 20px;
+    /*padding: 15px;*/
+    margin-left: 30px;
+    margin-top: -27px;
     display: block;
     line-height: 1.2;
     -webkit-transition: color 0.4s;
@@ -238,30 +222,9 @@ label[for='toggle-all'] {
     margin-bottom: -1px;
 }
 
-/*
-	Hack to remove background from Mobile Safari.
-	Can't use it globally since it destroys checkboxes in Firefox and Opera
-*/
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    #toggle-all,
-    #todo-list li .toggle {
-        background: none;
-    }
-
-    #todo-list li .toggle {
-        height: 40px;
-    }
-
-    #toggle-all {
-        width: 65px;
-        height: 41px;
-        -webkit-transform: rotate(90deg);
-        transform: rotate(90deg);
-        -webkit-appearance: none;
-        appearance: none;
-    }
-}
-
 .hidden{
     display:none;
+}
+.visibility{
+    visibility: hidden;
 }

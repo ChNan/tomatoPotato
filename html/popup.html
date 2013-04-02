@@ -3,7 +3,7 @@
 <head>
     <title>TomatoPotato</title>
     <meta charset="utf-8">
-    <script src="../seajs/sea-debug.js" data-config="js/config.js" data-main="js/main.js"></script>
+    <script src="../seajs/sea-debug.js" data-config="js/config.js" data-main="js/views/main.js"></script>
 </head>
 <body>
     <div class="main">
@@ -11,24 +11,20 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <a class="brand">Tomato potato</a>
-                    <!--<ul class="nav">-->
-                        <!--<li class="active"><a href="#">history</a></li>-->
-                    <!--</ul>-->
+                    <ul class="nav">
+                        <li class="active"><a href="#">history</a></li>
+                        <li><a href="#">setting</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="current-tomato">
-            <div class="setting">
-                <ul class="the-icons">
-                    <li title="设置" class="icon-cog"></li>
-                </ul>
-            </div>
             <span class="timer"></span>
         </div>
         <input id="new-todo" placeholder="What needs to be done?" autofocus="">
         <input id="toggle-all" type="checkbox">
         <div class="tomato-list">
-
+            <ul id="todo-list"></ul>
         </div>
     </div>
     <iframe id="theFrame"></iframe>
