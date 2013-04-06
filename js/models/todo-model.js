@@ -14,9 +14,9 @@ define(function(require, exports, module){
         defaults: {
             id: null,
             todo: null,
-            tomato: null,
+            tomato: 0,
             timestamp: null,
-            status: null
+            status: 0
         },
 
         sync: function(method, model, options){
@@ -29,7 +29,7 @@ define(function(require, exports, module){
                     this.updateModel(options);
                     break;
                 case 'delete':
-                    this.deleteModel();
+                    this.deleteModel(options);
                     break;
             }
         },
@@ -73,7 +73,6 @@ define(function(require, exports, module){
                 options.success(model.toJSON());
             }
         }
-
     });
 
     module.exports = todoModel;

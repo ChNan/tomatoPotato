@@ -21,7 +21,8 @@ define(function(require, exports, module){
         triggerList: {
 
             timeout: 'tomatoTime:timeout',
-            timeChange: 'tomatoTime:change'
+            timeChange: 'tomatoTime:change',
+            timeStop: 'tomatoTime:stop'
         },
 
         initialize: function () {
@@ -42,7 +43,7 @@ define(function(require, exports, module){
                 }
             }
 
-            if (this._min === 25) {
+            if (this._min === 1) {
 
                 this.trigger(this.triggerList.timeout, this);
 
@@ -83,10 +84,10 @@ define(function(require, exports, module){
             this._timeInterval = null;
 
             this._min = this._sec = 0;
-        },
 
-        render: function () {
+            this.time = '00:00';
 
+            this.trigger(this.triggerList.timeChange, this);
         }
     });
 

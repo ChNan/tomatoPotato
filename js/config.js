@@ -23,6 +23,10 @@ seajs.config({
             exports: 'Backbone',
             deps: ['jquery', 'underscore']
         },
+        'mustache': {
+            src: 'lib/mustache.js',
+            exports: 'Mustache'
+        },
         'bootstrap': 'lib/bootstrap.min.js'
     }
 });

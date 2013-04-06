@@ -72,7 +72,30 @@ define(function(require, exports, module){
                 params.push(where.date);
             }
 
-            sql = sql + 'order by timestamp desc';
+            sql = sql + 'order by timestamp asc';
+
+            this._executeSql(sql, params, successCallback);
+        },
+
+        getTodayTomato: function(successCallback){
+
+            function checkTime(t) {
+
+                if(t < 10){
+                    t = '0' + t;
+                }
+                return t;
+            }
+
+            var date = new Date(),
+                year = date.getFullYear(),
+                month = date.getMonth() + 1,
+                day = date.getDate(),
+                d =  year+'-'+checkTime(month)+'-'+checkTime(day);
+
+            var sql = 'SELECT sum(tomato) as tomato FROM todoList WHERE timestamp > ?';
+
+            var params = [d];
 
             this._executeSql(sql, params, successCallback);
         },

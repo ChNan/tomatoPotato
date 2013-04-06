@@ -18,18 +18,23 @@ define(function(require, exports, module){
 
             this.options = options || {};
 
-            this._getAllTodo();
+            this._getAllTodo(this.options);
         },
 
-        _getAllTodo: function(){
-
-            var that = this;
+        _getAllTodo: function(options){
 
             window.dbHelper.getTodo(null, function(results){
 
+                var data = [];
+
                 for(var i= 0, length = results.rows.length; i < length; i++){
 
-                    that.add(results.rows.item(i));
+                    data.push(results.rows.item(i));
+                }
+
+                if(options && options.success){
+
+                    options.success(data);
                 }
             });
         }
