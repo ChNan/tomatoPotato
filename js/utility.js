@@ -36,11 +36,7 @@ define(function(require, exports, module){
             year, checkTime(month), checkTime(day), checkTime(h), checkTime(m), checkTime(s));
 
         function checkTime(t) {
-
-            if(t < 10){
-                t = '0' + t;
-            }
-
+            if(t < 10)t = '0' + t;
             return t;
         }
     };

@@ -12,11 +12,9 @@ define(function(require, exports, module){
 
     var tomatoTime = backbone.View.extend({
 
-        _min: 0,
+        min: 0,
 
-        _sec: 0,
-
-        time: '00:00',
+        sec: 0,
 
         triggerList: {
 
@@ -34,31 +32,20 @@ define(function(require, exports, module){
 
             if (sec && _.isNumber(sec) && sec <= 60) {
 
-                this._sec += sec;
+                this.sec += sec;
 
-                if (this._sec === 60) {
+                if (this.sec === 60) {
 
-                    this._sec = 0;
-                    this._min += 1;
+                    this.sec = 0;
+                    this.min += 1;
                 }
             }
 
-            if (this._min === 1) {
+            if (this.min === 1) {
 
                 this.trigger(this.triggerList.timeout, this);
 
                 this.stopTomato();
-            }
-
-            this.time = checkTime(this._min) + ':' + checkTime(this._sec);
-
-            function checkTime(t) {
-
-                if(t < 10){
-                    t = '0' + t;
-                }
-
-                return t;
             }
         },
 
@@ -83,11 +70,9 @@ define(function(require, exports, module){
 
             this._timeInterval = null;
 
-            this._min = this._sec = 0;
+            this.trigger(this.triggerList.timeStop, this);
 
-            this.time = '00:00';
-
-            this.trigger(this.triggerList.timeChange, this);
+            this.min = this.sec = 0;
         }
     });
 

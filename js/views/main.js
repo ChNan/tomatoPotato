@@ -30,7 +30,11 @@ define(function(require, exports, module){
             'click .tomato-destroy': 'waiverTomato'
         },
 
+        // 番茄数
         tomatoCount: 0,
+
+        // 土豆数
+        todoCount: 0,
 
         initialize: function(options){
 
@@ -66,6 +70,7 @@ define(function(require, exports, module){
             }
         },
 
+        // 创建一个土豆
         createTodo: function(e){
 
             if(e.which === 13){
@@ -81,6 +86,7 @@ define(function(require, exports, module){
             }
         },
 
+        // 添加一个土豆
         addTodo: function(todo){
 
             var view = new todoView({model: todo});
@@ -90,7 +96,7 @@ define(function(require, exports, module){
                 view.todoComplete();
             } else {
 
-                this.tomatoCount++;
+                this.todoCount++;
             }
 
             $('#todo-list').prepend(view.render().el);
@@ -101,26 +107,20 @@ define(function(require, exports, module){
 
                 if(t.model.get('id') === todo.get('id') && todo.get('status') === 0){
 
-                    if(t.model.get('tomato') !== todo.get('tomato')){
-
-                        view.model.set({tomato: t.model.get('tomato')}, {silent: true});
-
-                        view.updateTomato();
-
-                        view.restoreDefault();
-                    } else {
-
-                        view.restoreStart();
-                    }
+                    view.restoreStart();
                 }
+            } else {
+
+                view.restoreDefault();
             }
 
             this.setBadgeText();
         },
 
+        // 加载当天所有土豆
         addAllTodo: function(){
 
-            this.tomatoCount = 0;
+            this.todoCount = 0;
 
             $('#todo-list').empty();
 
@@ -130,14 +130,47 @@ define(function(require, exports, module){
         // 设置图标上番茄个数
         setBadgeText: function(){
 
-            chrome.browserAction.setBadgeText({text: this.tomatoCount.toString()});
+            chrome.browserAction.setBadgeText({
+                text: this.todoCount.toString()+':'+this.tomatoCount.toString()
+            });
         },
 
+        // 设置当前番茄时间
         setTomatoTime: function(time){
 
-            $('.timer').html(time);
+            var $timer = $('.timer');
+
+            $timer.html(utility.stringFormat('{0}:{1}',
+                checkTime(time.min), checkTime(time.sec)));
+
+            if(time.min === 1){
+
+                this.tomatoCount++;
+
+                $timer.html('00:00');
+
+                var t = background.tomatoTime.currentTomato;
+
+                t.model.set({tomato: (t.model.get('tomato') + 1)},{silent: true});
+
+                t.updateTomato();
+
+                background.tomatoTime.currentTomato = null;
+
+                this.addAllTodo();
+
+                this.getTodayTomato();
+
+                this.setBadgeText();
+            }
+
+            function checkTime(t) {
+                if(t < 10) t = '0' + t;
+                return t;
+            }
         },
 
+        // 放弃当前番茄
         waiverTomato: function(){
 
             if(background.tomatoTime){
@@ -151,21 +184,29 @@ define(function(require, exports, module){
             }
         },
 
+        // 获取当天以使用番茄数
         getTodayTomato: function(){
+
+            var that = this;
 
             window.dbHelper.getTodayTomato(function(results){
 
-                 this.$('.today-tomato').html('今天共用了 ' + results.rows.item(0).tomato + ' 个番茄');
+                if(results.rows.item(0).tomato){
+
+                    that.tomatoCount = results.rows.item(0).tomato;
+
+                    that.$('.today-tomato').html('今天共用了 ' + that.tomatoCount + ' 个番茄');
+                }
             });
         },
 
         render: function(){
 
+            this.getTodayTomato();
+
             this._todoColl.fetch({reset: true});
 
-            this.setTomatoTime('00:00');
-
-            this.getTodayTomato();
+            $('.timer').html('00:00');
         }
     });
 

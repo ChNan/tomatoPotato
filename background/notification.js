@@ -19,9 +19,9 @@ define(function(require, exports, module){
                 '土豆：' + todo
             );
 
-            notification_test.display = function() {}
-            notification_test.onerror = function() {}
-            notification_test.onclose = function() {}
+            notification_test.display = function() {};
+            notification_test.onerror = function() {};
+            notification_test.onclose = function() {};
             notification_test.onclick = function() {
                 this.cancel();
             };

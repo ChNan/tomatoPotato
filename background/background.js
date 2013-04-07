@@ -23,11 +23,9 @@ define(function(require, exports, module){
         setMainTime(t);
     });
 
-    tomatoTime.on(tomatoTime.triggerList.timeout, function(){
+    tomatoTime.on(tomatoTime.triggerList.timeout, function(t){
 
         msg.message(tomatoTime.currentTomato.model.get('todo'));
-
-        tomatoTime.currentTomato.model.set({tomato: tomatoTime.currentTomato.model.get('tomato') + 1}, {silent: true});
     });
 
     // 设置主页时间
@@ -35,9 +33,9 @@ define(function(require, exports, module){
 
         var views = chrome.extension.getViews({type:'popup'});
 
-        if(views){
+        if(views && views.length > 0){
 
-            views[0].main.setTomatoTime(t.time);
+            views[0].main.setTomatoTime(t);
         }
     }
 
