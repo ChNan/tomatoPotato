@@ -9,18 +9,19 @@ define(function(require, exports, module){
 
     var time = require('background/tomato-time');
     var msg = require('background/notification');
+    var _ = require('underscore');
 
     window.tomatoTime = new time();
 
      // 设置当前番茄时间
     tomatoTime.on(tomatoTime.triggerList.timeChange, function(t){
 
-        setMainTime(t);
+        setMainTime(t.min, t.sec);
     });
 
     tomatoTime.on(tomatoTime.triggerList.timeStop, function(t){
 
-        setMainTime(t);
+        setMainTime(t.min, t.sec);
     });
 
     tomatoTime.on(tomatoTime.triggerList.timeout, function(t){
@@ -29,16 +30,15 @@ define(function(require, exports, module){
     });
 
     // 设置主页时间
-    function setMainTime(t){
+    function setMainTime(min, sec){
 
         var views = chrome.extension.getViews({type:'popup'});
 
         if(views && views.length > 0){
 
-            views[0].main.setTomatoTime(t);
+            views[0].main.setTomatoTime(min, sec);
         }
     }
-
 });
 
 

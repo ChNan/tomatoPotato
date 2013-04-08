@@ -43,12 +43,12 @@ define(function(require, exports, module){
         },
 
         // 建表
-        _createTable: function(){
+        _createTable: function(successCallback){
 
             var createTableSql = 'create table if not exists todoList ' +
                 '(id TEXT, todo TEXT, tomato INT, timestamp DATETIME, status INT) ';
 
-            this._executeSql(createTableSql, []);
+            this._executeSql(createTableSql, [], successCallback);
         },
 
         // 查询todo

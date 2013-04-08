@@ -16,6 +16,8 @@ define(function(require, exports, module){
 
         sec: 0,
 
+        isTimeout: false,
+
         triggerList: {
 
             timeout: 'tomatoTime:timeout',
@@ -45,6 +47,8 @@ define(function(require, exports, module){
 
                 this.trigger(this.triggerList.timeout, this);
 
+                this.isTimeout = true;
+
                 this.stopTomato();
             }
         },
@@ -52,6 +56,8 @@ define(function(require, exports, module){
         startTomato: function(){
 
             var that = this;
+
+            this.isTimeout = false;
 
             if(!this._timeInterval){
 

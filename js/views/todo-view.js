@@ -108,7 +108,7 @@ define(function(require, exports, module){
 
                 background.tomatoTime.stopTomato();
 
-                background.tomatoTime.currentTomato = null
+                this.clearCache();
             }
 
             this.$el.removeClass('start-tomato').addClass('completed');
@@ -147,13 +147,12 @@ define(function(require, exports, module){
 
             this._pending = false;
 
-            if(background.tomatoTime){
-
-                background.tomatoTime.currentTomato = null
-            }
+            this.clearCache();
         },
 
         updateTomato: function(){
+
+            this.clearCache();
 
             this.model.save(this.model.toJSON(), {silent: false, wait: true});
         },
@@ -167,7 +166,15 @@ define(function(require, exports, module){
 
                 background.tomatoTime.stopTomato();
 
-                background.tomatoTime.currentTomato = null;
+                this.clearCache();
+            }
+        },
+
+        clearCache: function(){
+
+            if(background.tomatoTime){
+
+                background.tomatoTime.currentTomato = null
             }
         },
 

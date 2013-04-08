@@ -7,6 +7,7 @@
  */
 define(function(require, exports, module){
 
+    require('js/localStorage');
     window.background = chrome.extension.getBackgroundPage();
 
     var backbone = require('backbone');
@@ -14,7 +15,6 @@ define(function(require, exports, module){
     var $ = jQuery = require('jquery');
     var bootstrap = require('bootstrap');
 
-    require('js/localStorage');
     var todoCollection = require('js/collections/todo-collection');
     var utility = require('js/utility');
     var todoView = require('js/views/todo-view');
@@ -108,6 +108,17 @@ define(function(require, exports, module){
                 if(t.model.get('id') === todo.get('id') && todo.get('status') === 0){
 
                     view.restoreStart();
+
+                    if(background.tomatoTime.isTimeout){
+
+                        view.model.set(
+                            {tomato: (t.model.get('tomato') + 1)},
+                            {silent: true});
+
+                        view.updateTomato();
+
+                        view.restoreDefault();
+                    }
                 }
             } else {
 
@@ -125,6 +136,8 @@ define(function(require, exports, module){
             $('#todo-list').empty();
 
             this._todoColl.each(this.addTodo, this);
+
+            this.getTodayTomato();
         },
 
         // 设置图标上番茄个数
@@ -136,32 +149,20 @@ define(function(require, exports, module){
         },
 
         // 设置当前番茄时间
-        setTomatoTime: function(time){
+        setTomatoTime: function(min, sec){
 
             var $timer = $('.timer');
 
             $timer.html(utility.stringFormat('{0}:{1}',
-                checkTime(time.min), checkTime(time.sec)));
+                checkTime(min), checkTime(sec)));
 
-            if(time.min === 1){
+            if(min === 1 || background.tomatoTime.isTimeout){
 
                 this.tomatoCount++;
 
                 $timer.html('00:00');
 
-                var t = background.tomatoTime.currentTomato;
-
-                t.model.set({tomato: (t.model.get('tomato') + 1)},{silent: true});
-
-                t.updateTomato();
-
-                background.tomatoTime.currentTomato = null;
-
                 this.addAllTodo();
-
-                this.getTodayTomato();
-
-                this.setBadgeText();
             }
 
             function checkTime(t) {
@@ -206,7 +207,7 @@ define(function(require, exports, module){
 
             this._todoColl.fetch({reset: true});
 
-            $('.timer').html('00:00');
+            this.setTomatoTime(0, 0);
         }
     });
 
