@@ -21,7 +21,7 @@ define(function(require, exports, module){
 
     tomatoTime.on(tomatoTime.triggerList.timeStop, function(t){
 
-        setMainTime(t.min, t.sec);
+        setMainTime(0, 0);
     });
 
     tomatoTime.on(tomatoTime.triggerList.timeout, function(t){
