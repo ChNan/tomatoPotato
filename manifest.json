@@ -1,6 +1,6 @@
 {
     "name": "tomatoPotato",
-    "version": "1.0",
+    "version": "1.0.0",
     "manifest_version": 2,
     "description": "tomato potato, time management",
     "browser_action": {

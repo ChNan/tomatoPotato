@@ -152,9 +152,9 @@ define(function(require, exports, module){
 
         updateTomato: function(){
 
-            this.clearCache();
-
             this.model.save(this.model.toJSON(), {silent: false, wait: true});
+
+            this.clearCache();
         },
 
         remove: function(){

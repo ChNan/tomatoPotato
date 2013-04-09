@@ -120,7 +120,7 @@ define(function(require, exports, module){
                         view.restoreDefault();
                     }
                 }
-            } else {
+            } else if(todo.get('status') !== 1){
 
                 view.restoreDefault();
             }
