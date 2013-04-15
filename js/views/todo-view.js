@@ -19,8 +19,8 @@ define(function(require, exports, module){
         events: {
             'click .todo-play': 'startOrCompletedTomato',
             'click .todo-destroy': 'remove',
-            'mouseover .view': 'displayIcon',
-            'mouseout .view': 'displayIcon',
+//            'mouseover .view': 'displayIcon',
+//            'mouseout .view': 'displayIcon',
             'dblclick label': 'editTodo',
             'keypress .edit': 'updateTodo',
             'blur .edit': 'editComplete'
@@ -37,7 +37,7 @@ define(function(require, exports, module){
             if(!this._pending){
 
                 this.$('.todo-play').toggleClass('icon-play');
-                this.$('.todo-destroy').toggleClass('icon-remove');
+//                this.$('.todo-destroy').toggleClass('icon-remove');
             }
         },
 
@@ -130,9 +130,7 @@ define(function(require, exports, module){
 
             this.$el.addClass('start-tomato');
 
-            this.$('.todo-play').addClass('icon-ok');
-
-            this.$('.todo-destroy').addClass('icon-remove');
+            this.$('.todo-play').removeClass('icon-play').addClass('icon-ok');
 
             this._pending = true;
         },
@@ -141,18 +139,14 @@ define(function(require, exports, module){
 
             this.$el.removeClass('start-tomato');
 
-            this.$('.todo-play').removeClass('icon-ok');
-
-            this.$('.todo-destroy').removeClass('icon-remove');
-
             this._pending = false;
 
             this.clearCache();
         },
 
-        updateTomato: function(){
+        updateTomato: function(callback){
 
-            this.model.save(this.model.toJSON(), {silent: false, wait: true});
+            this.model.save(this.model.toJSON(), {silent: false, wait: true, success: callback});
 
             this.clearCache();
         },

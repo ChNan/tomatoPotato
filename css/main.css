@@ -136,12 +136,33 @@ label[for='toggle-all'] {
 }
 
 #todo-list li div .todo-play{
-    margin: 10px;
+    margin-top: 5px;
+    float: left;
+    display: none;
+}
+
+#todo-list li:hover .todo-play {
+    display: block;
+}
+
+#todo-list li div .todo-ok{
+    margin-top: 5px;
+    float: left;
+    display: none;
+}
+
+#todo-list li:hover .todo-ok {
+    display: block;
 }
 
 #todo-list li div .todo-destroy{
     margin-top: -25px;
     float: right;
+    display: none;
+}
+
+#todo-list li:hover .todo-destroy {
+    display: block;
 }
 
 #todo-list li:last-child {
@@ -174,7 +195,7 @@ label[for='toggle-all'] {
     font-size: 20px;
     /*padding: 15px;*/
     margin-left: 30px;
-    margin-top: -27px;
+    /*margin-top: 10px;*/
     display: block;
     line-height: 1.2;
     -webkit-transition: color 0.4s;

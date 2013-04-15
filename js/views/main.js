@@ -89,6 +89,8 @@ define(function(require, exports, module){
         // 添加一个土豆
         addTodo: function(todo){
 
+            var that = this;
+
             var view = new todoView({model: todo});
 
             if(todo.get('status') > 0){
@@ -115,7 +117,13 @@ define(function(require, exports, module){
                             {tomato: (t.model.get('tomato') + 1)},
                             {silent: true});
 
-                        view.updateTomato();
+                        view.updateTomato(function(){
+
+                            that.getTodayTomato(function(){
+
+                                that.setBadgeText();
+                            });
+                        });
 
                         view.restoreDefault();
                     }
@@ -136,8 +144,6 @@ define(function(require, exports, module){
             $('#todo-list').empty();
 
             this._todoColl.each(this.addTodo, this);
-
-            this.getTodayTomato();
         },
 
         // 设置图标上番茄个数
@@ -157,8 +163,6 @@ define(function(require, exports, module){
                 checkTime(min), checkTime(sec)));
 
             if(min === 1 || background.tomatoTime.isTimeout){
-
-                this.tomatoCount++;
 
                 $timer.html('00:00');
 
@@ -186,7 +190,7 @@ define(function(require, exports, module){
         },
 
         // 获取当天以使用番茄数
-        getTodayTomato: function(){
+        getTodayTomato: function(callback){
 
             var that = this;
 
@@ -197,6 +201,8 @@ define(function(require, exports, module){
                     that.tomatoCount = results.rows.item(0).tomato;
 
                     that.$('.today-tomato').html('今天共用了 ' + that.tomatoCount + ' 个番茄');
+
+                    if(callback)callback();
                 }
             });
         },
